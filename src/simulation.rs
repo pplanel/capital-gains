@@ -158,7 +158,7 @@ impl Tax {
     }
 }
 
-impl Debug for Tax {
+impl Display for Tax {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(f, "{:.2}", self.tax)
     }
@@ -195,7 +195,8 @@ pub fn calculate_weighted_avarage(
     new_quantity: usize,
     new_unit_price: f64,
 ) -> f64 {
-    let result = ((total_shares as f64 * weighted_avarage) + (new_quantity as f64 * new_unit_price))
+    let result = ((total_shares as f64 * weighted_avarage)
+        + (new_quantity as f64 * new_unit_price))
         / (total_shares as f64 + new_quantity as f64);
     (result * 100.0).round() / 100.0
 }
@@ -255,26 +256,16 @@ mod tests {
         println!("{:.2}", value);
     }
 
-
     #[test]
     fn test_calculate_weighted_average() {
         // Test case 1: Simple case
-        assert_eq!(
-            calculate_weighted_avarage(100, 10.0, 50, 20.0),
-            13.33
-        );
+        assert_eq!(calculate_weighted_avarage(100, 10.0, 50, 20.0), 13.33);
 
         // Test case 2: No existing shares
-        assert_eq!(
-            calculate_weighted_avarage(0, 0.0, 100, 15.0),
-            15.00
-        );
+        assert_eq!(calculate_weighted_avarage(0, 0.0, 100, 15.0), 15.00);
 
         // Test case 3: No new shares
-        assert_eq!(
-            calculate_weighted_avarage(100, 10.0, 0, 0.0),
-            10.00
-        );
+        assert_eq!(calculate_weighted_avarage(100, 10.0, 0, 0.0), 10.00);
 
         // Test case 4: Large numbers
         assert_eq!(
@@ -283,10 +274,7 @@ mod tests {
         );
 
         // Test case 5: Fractional prices
-        assert_eq!(
-            calculate_weighted_avarage(200, 15.75, 100, 16.25),
-            15.92
-        );
+        assert_eq!(calculate_weighted_avarage(200, 15.75, 100, 16.25), 15.92);
     }
 
     #[test]
@@ -313,7 +301,7 @@ mod tests {
 
     #[test]
     fn test_case_1_and2() {
-        let cases = vec![
+        let cases = [
             r#"[{"operation":"buy", "unit-cost":10.00, "quantity": 100}, {"operation":"sell", "unit-cost":15.00, "quantity": 50},{"operation":"sell", "unit-cost":15.00, "quantity": 50}]"#,
             r#"[{"operation":"buy", "unit-cost":10.00, "quantity": 10000}, {"operation":"sell", "unit-cost":20.00, "quantity": 5000}, {"operation":"sell", "unit-cost":5.00, "quantity": 5000}]"#,
         ];
