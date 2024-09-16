@@ -251,12 +251,6 @@ mod tests {
     }
 
     #[test]
-    fn test_a() {
-        let value = 22.0;
-        println!("{:.2}", value);
-    }
-
-    #[test]
     fn test_calculate_weighted_average() {
         // Test case 1: Simple case
         assert_eq!(calculate_weighted_avarage(100, 10.0, 50, 20.0), 13.33);
