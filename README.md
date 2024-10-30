@@ -26,69 +26,46 @@ These libraries were chosen for their reliability, performance, and wide adoptio
 
 ## Compilation and Execution
 
-1. Ensure you have Docker installed on your system.
+1. Ensure you have Rust and Cargo installed on your system. If not, you can install them from [https://www.rust-lang.org/tools/install](https://www.rust-lang.org/tools/install).
 2. Clone this repository.
 3. Navigate to the project directory.
 4. To compile and build the project:
 
    ```
-   make build
+   cargo build --release
    ```
 
-   This will build the project for the default target OS (linux). The resulting binary will be in the `./output` directory.
+   This will build the project in release mode. The resulting binary will be in the `./target/release` directory.
 
-5. To build for a specific OS, use the `TARGET_OS` variable:
-
-   ```
-   make build TARGET_OS=macos
-   ```
-
-   or
+5. To run the compiled binary:
 
    ```
-   make build TARGET_OS=windows
-   ```
-
-6. To run the compiled binary:
-
-   ```
-   ./output/capital-gains < fixtures.json
+   ./target/release/capital-gains < fixtures.json
    ```
 
    Replace `fixtures.json` with the path to your input file.
 
-7. To clean up built files and Docker images:
+6. Alternatively, you can compile and run the project in one step:
 
    ```
-   make clean
+   cargo run --release -- < fixtures.json
    ```
 
-8. For more information on available make targets:
+7. To clean up built files:
 
    ```
-   make help
+   cargo clean
    ```
 
-Note: The Makefile uses Docker to ensure a consistent build environment across different systems.
+Note: Cargo ensures a consistent build environment across different systems, so there's no need for Docker in this setup.
 
 ## Running Tests
 
 To run the test suite:
 
-```
-cargo test
-```
-
-## Running the simulation
-
-The file `fixtures.json` contains the input data for the simulation provided in the problem statement.
-
-```
-cargo run -- < <path_to_file>
-```
-
-This command will execute all unit tests defined in the project.
-
+   ```
+   cargo test
+   ```
 
 ## Additional Notes
 
